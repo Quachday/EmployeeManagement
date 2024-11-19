@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Employee Management</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/add" method="post" class="mb-4">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="position" placeholder="Position" required>
+        <select name="department_id" required>
+            <option value="">Select Department</option>
+            <option value="1">Human Resources</option>
+            <option value="2">Development</option>
+            <option value="3">Marketing</option>
+            <option value="4">Sales</option>
+            <option value="5">Finance</option>
+        </select>
+        <input type="number" name="salary" placeholder="Salary" required>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee[0] }}</td>
+                <td>{{ employee[1] }}</td>
+                <td>{{ employee[2] }}</td>
+                <td>{{ employee[3] }}</td>
+                <td>{{ employee[4] }}</td>
+                <td>
+                    <form action="/update/{{ employee[0] }}" method="post" class="d-inline">
+                        <input type="text" name="name" placeholder="Name" value="{{ employee[1] }}" required>
+                        <input type="text" name="position" placeholder="Position" value="{{ employee[2] }}" required>
+                        <select name="department_id" required>
+                            <option value="{{ employee[3] }}">{{ employee[3] }}</option>
+                            <option value="1">Human Resources</option>
+                            <option value="2">Development</option>
+                            <option value="3">Marketing</option>
+                            <option value="4">Sales</option>
+                            <option value="5">Finance</option>
+                        </select>
+                        <input type="number" name="salary" placeholder="Salary" value="{{ employee[4] }}" required>
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    </form>
+                    <form action="/delete/{{ employee[0] }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
