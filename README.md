@@ -15,12 +15,8 @@ Open your terminal or command prompt and run:
 
 ```bash
 git clone https://github.com/Quachday/EmployeeManagement.git
-```bash
 cd EmployeeManagement
-```bash
 docker-compose up --build
-
-```bash
-run on web: http://localhost:5000/
+#run on web: http://localhost:5000/
 
 
