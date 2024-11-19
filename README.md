@@ -10,9 +10,17 @@ This is a simple Employee Management System built with Flask and SQLite, contain
 
 To get a copy of this project up and running on your local machine, follow these steps:
 
-### 1. Clone the Repository
 
 Open your terminal or command prompt and run:
 
 ```bash
 git clone https://github.com/Quachday/EmployeeManagement.git
+```bash
+cd EmployeeManagement
+```bash
+docker-compose up --build
+
+```bash
+run on web: http://localhost:5000/
+
+
